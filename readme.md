@@ -2,9 +2,11 @@ Score Board
 
 ![](https://github.com/eddylin2015/scoreboard/blob/main/img/p1.jpg?raw=true)
 
-install node js x84_64   
+[install node js x84_64](https://nodejs.org/en/download/)   
+code->download zip   
+```cmd
 npm install express    
 npm install pug     
 node app    
-   
-http://localhost:3000
+explorer http://localhost:3000
+```   
