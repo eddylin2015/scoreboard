@@ -149,9 +149,6 @@
     <p class="mb-0"></p>
   </div>
 </footer>
-
-
-    
     script.
         function SetMark(i,num_){
             let c_num =Number($(`#counter${i}_num`).text());
@@ -210,13 +207,12 @@
             for(let i=1;i<=teams_num;i++){
               marks.push(Number($(`#counter${i}_num`).text()));
             }
-            
-            let marks_=marks.sort(function(a, b){return b-a})
-            console.log(marks)
-            console.log(marks_)
-            for(let i=0;i<marks.length;i++){
-              for(let j=0;j<teams_num;j++){
-                if(marks[i]==marks_[j]) {$(`#team_rank_${i+1}`).text(j+1);break;}
+            marks.sort(function(a, b){return b-a})
+            for(let i=1;i<=teams_num;i++){
+              let n_=Number($(`#counter${i}_num`).text());
+              if(n_==0) continue;
+              for(let j=0;j<marks.length;j++){
+                if(n_==marks[j]) {$(`#team_rank_${i}`).text(j+1);break;}
               }
             }
         });    
@@ -228,6 +224,5 @@
         //    format: '9999',
         //    stop: '2012'
         //});
-      
 </body>
 </html>

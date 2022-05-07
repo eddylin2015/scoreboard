@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/scoreboard', require('./routes/scoreboard/crud'));
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('<a href=/scoreboard>score board</a>')
 })
 
 app.listen(port, () => {
