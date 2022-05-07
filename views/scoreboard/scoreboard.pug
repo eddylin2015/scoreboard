@@ -152,10 +152,12 @@
     script.
         function SetMark(i,num_){
             let c_num =Number($(`#counter${i}_num`).text());
+            let start=c_num;
+            if(Math.abs(num_ - c_num)>30) start=num_;
             let dir="up";
             if(c_num>num_) dir="down"
             $(`#counter${i}`).counter({
-            initial: $(`#counter${i}_num`).text(),
+            initial:start,
             direction: dir,
             interval: '1',
             format: '999',

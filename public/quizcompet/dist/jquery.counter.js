@@ -50,6 +50,7 @@
             animate(e, i, j, digit);
         };
         while (i >= to) {
+            try{
             var part = data.parts[i];
             var digits = part.value + '';
             while (digits.length < part.padding) {
@@ -57,7 +58,12 @@
             }
             $.each(split(digits, ''), animateIJ);
             i--;
+            }catch(except){
+               console.log(except)
+               return;
+            }
         }
+
     };
 
     var animate = function(e, ipart, idigit, digit) {
