@@ -65,6 +65,7 @@
   </div>
 </header>
 - teams=["隊一","隊二","隊三","隊四"]
+<span id=teams_num style="display:none">!{teams.length}</span>
 <main>
   <section class="py-3 text-center container">
     <h1 class="fw-light" id=quiz_title>22年度問答比賽</h1>
@@ -74,6 +75,7 @@
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
         - idx=0
+        
         each team in teams
             - idx++
             <div class="col">
@@ -90,10 +92,10 @@
                   <p class="card-text"></p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">+</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">-</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary" onclick="AddMark(!{idx})">+</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary" onclick="MinMark(!{idx})">-</button>
                     </div>
-                    <small class="text-muted">0</small>
+                    <small id="counter!{idx}_num" class="text-muted">0</small>
                   </div>
                 </div>
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="60" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -114,10 +116,10 @@
     <span>計分類別:</span>
     <input type=radio name="tx" value="A" checked="true">
     <span>A:</span>
-    <input value="5" size="2">
+    <input id=tx_a_mark value="5" size="2">
     <input type=radio name="tx" value="B">
     <span>B:</span>
-    <input value="10" size="2">    
+    <input id=tx_a_mark value="10" size="2">    
     <input type="button" value="不顯示">    
     <input type="button" value="顯示排名">
     <br>
@@ -151,22 +153,38 @@
 
     
     script.
+        function SetMark(i,num_){
+            let c_num =Number($(`#counter${i}_num`).text());
+            let dir="up";
+            if(c_num>num_) dir="down"
+            $(`#counter${i}`).counter({
+            initial: $(`#counter${i}_num`).text(),
+            direction: dir,
+            interval: '1',
+            format: '999',
+            stop: num_
+            });
+            $(`#counter${i}_num`).text(num_);
+        }
+        function AddMark(i){
+            let c_num =Number($(`#counter${i}_num`).text());
+            SetMark(i,c_num + 5)
+        }
+        function MinMark(i){
+            let c_num =Number($(`#counter${i}_num`).text());
+            SetMark(i,c_num - 5)
+        }
+        let teams_num=Number($('#teams_num').text());
+        console.log(teams_num)
         $( "#button_quiz_title" ).click(function() {
             let input_quiz_title=$('#input_quiz_title').val()
             $('#quiz_title').text(input_quiz_title)
         });    
         $( "#botton_init_mark" ).click(function() {
-            console.log("xxxx")
-
-            $('#counter1').counter({
-            initial: '0:00.0',
-            direction: 'up',
-            interval: '1',
-            format: '999',
-            stop: '012'
-            });
+            for(let i=1;i<=teams_num;i++){
+              SetMark(i,100)
+            }
         });    
-        
         $('.counter').counter();
         //$('#custom').addClass('counter-analog').counter({
         //    initial: '0:00.0',
