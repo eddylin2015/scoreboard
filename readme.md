@@ -1,3 +1,3 @@
 Score Board
 
-<img src=raw/main/img/p1.jpg>
+<img src=https://github.com/eddylin2015/scoreboard/blob/main/img/p1.jpg?raw=true>
