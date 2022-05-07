@@ -83,7 +83,7 @@
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="60" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                   <title>Placeholder</title>
                   <rect width="100%" height="100%" fill="#55595c"/>
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em" style="font-size:30px;">!{team}</text>
+                  <text id=team_title_!{idx} x="50%" y="50%" fill="#eceeef" dy=".3em" style="font-size:30px;">!{team}</text>
                 </svg>
                 <div class="card-body">
                   <p class="text-center">
@@ -101,7 +101,7 @@
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="60" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                   <title>Placeholder</title>
                   <rect width="100%" height="100%" fill="#55595c"/>
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em" style="font-size:30px;">--</text>
+                  <text id=team_rank_!{idx} x="50%" y="50%" fill="#eceeef" dy=".3em" style="font-size:30px;">--</text>
                 </svg>
               </div>
             </div>
@@ -114,14 +114,14 @@
 <footer class="text-muted py-5">
   <div class="container">
     <span>計分類別:</span>
-    <input type=radio name="tx" value="A" checked="true">
+    <input type=radio name="tx" id=tx_check_a value="A" checked="true">
     <span>A:</span>
     <input id=tx_a_mark value="5" size="2">
-    <input type=radio name="tx" value="B">
+    <input type=radio name="tx" id=tx_check_b  value="B">
     <span>B:</span>
-    <input id=tx_a_mark value="10" size="2">    
-    <input type="button" value="不顯示">    
-    <input type="button" value="顯示排名">
+    <input id=tx_b_mark value="10" size="2">    
+    <input id=botton_hiden_rank type="button" value="不顯示">    
+    <input id=botton_show_rank type="button" value="顯示排名">
     <br>
     <span>標題名稱:</span>
     <input id=input_quiz_title value="22年度問答比賽" size="36">    
@@ -129,17 +129,17 @@
 
     <br>
     <span>分組名稱:</span>
-    <input value="隊一" size="6">    
-    <input value="隊二" size="6">    
-    <input value="隊三" size="6">    
-    <input value="隊四" size="6">    
-    <input type="button" value="修改">
+    <input id=input_team_title_1 value="隊一" size="6">    
+    <input id=input_team_title_2 value="隊二" size="6">    
+    <input id=input_team_title_3 value="隊三" size="6">    
+    <input id=input_team_title_4 value="隊四" size="6">    
+    <input id=button_team_title type="button" value="修改">
     <br>
     <span>起始分數:</span>
-    <input value="100" size="6">    
-    <input value="100" size="6">    
-    <input value="100" size="6">    
-    <input value="100" size="6">    
+    <input id=input_start_mark_1 value="100" size="6">    
+    <input id=input_start_mark_2 value="100" size="6">    
+    <input id=input_start_mark_3 value="100" size="6">    
+    <input id=input_start_mark_4 value="100" size="6">    
     <input id=botton_init_mark type="button" value="修改">
 
     <p class="float-end mb-1">
@@ -167,12 +167,19 @@
             $(`#counter${i}_num`).text(num_);
         }
         function AddMark(i){
+            let interv=1;
+            console.log($('#tx_check_a:checked'))
+            if($('#tx_check_a:checked').length>0 ) interv=Number($('#tx_a_mark').val());
+            if($('#tx_check_b:checked').length>0 ) interv=Number($('#tx_b_mark').val());
             let c_num =Number($(`#counter${i}_num`).text());
-            SetMark(i,c_num + 5)
+            SetMark(i,c_num + interv)
         }
         function MinMark(i){
+            let interv=1;
+            if($('#tx_check_a:checked').length>0 ) interv=Number($('#tx_a_mark').val());
+            if($('#tx_check_b:checked').length>0 ) interv=Number($('#tx_b_mark').val());
             let c_num =Number($(`#counter${i}_num`).text());
-            SetMark(i,c_num - 5)
+            SetMark(i,c_num - interv)
         }
         let teams_num=Number($('#teams_num').text());
         console.log(teams_num)
@@ -180,9 +187,37 @@
             let input_quiz_title=$('#input_quiz_title').val()
             $('#quiz_title').text(input_quiz_title)
         });    
+        $( "#button_team_title" ).click(function() {
+          for(let i=1;i<=teams_num;i++){
+            let input_quiz_title=$(`#input_team_title_${i}`).val()
+            console.log(input_quiz_title)
+            $(`#team_title_${i}`).text(input_quiz_title)
+          }
+        });    
         $( "#botton_init_mark" ).click(function() {
             for(let i=1;i<=teams_num;i++){
-              SetMark(i,100)
+              let input_quiz_title=Number($(`#input_start_mark_${i}`).val())
+              SetMark(i,input_quiz_title)
+            }
+        });    
+        $( "#botton_hiden_rank" ).click(function() {
+            for(let i=1;i<=teams_num;i++){
+               $(`#team_rank_${i}`).text("---")
+            }
+        });    
+        $( "#botton_show_rank" ).click(function() {
+            let marks=[]
+            for(let i=1;i<=teams_num;i++){
+              marks.push(Number($(`#counter${i}_num`).text()));
+            }
+            
+            let marks_=marks.sort(function(a, b){return b-a})
+            console.log(marks)
+            console.log(marks_)
+            for(let i=0;i<marks.length;i++){
+              for(let j=0;j<teams_num;j++){
+                if(marks[i]==marks_[j]) {$(`#team_rank_${i+1}`).text(j+1);break;}
+              }
             }
         });    
         $('.counter').counter();
