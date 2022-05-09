@@ -8,12 +8,13 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
     <title>問答比賽</title>
-    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <!--script src="https://code.jquery.com/jquery-3.5.0.js"></script-->
+    <script src="/quizcompet/dist/js/jquery.min.js"></script>
     <link href="/quizcompet/dist/jquery.counter-analog2.css" media="screen" rel="stylesheet" type="text/css" />
     <script src="/quizcompet/dist/jquery.counter.js" type="text/javascript"></script>
     <!-- Bootstrap core CSS -->
-    <link href="/quizcompet/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="/quizcompet/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link href="/quizcompet/dist/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous"-->
+    <script src="/quizcompet/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <!-- Favicons -->
     <meta name="theme-color" content="#7952b3">
     style.
@@ -24,24 +25,20 @@
         -moz-user-select: none;
         user-select: none;
       }
-
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
         }
       }
-
-    
   </head>
   <body>
-    
 <header>
   <div class="collapse bg-dark" id="navbarHeader">
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-md-7 py-4">
           <h4 class="text-white">問答比賽</h4>
-          <p class="text-muted">some information about the Quiz .</p>
+          <p class="text-muted">000-999。不設負分，扣到零分為止，可以設始起分數。</p>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
           <h4 class="text-white">連絡</h4>
@@ -72,43 +69,40 @@
   </section>
   <div class="album py-1 bg-light">
     <div class="container">
-
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-!{teams.length} g-4">
         - idx=0
-        
         each team in teams
-            - idx++
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="60" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c"/>
-                  <text id=team_title_!{idx} x="50%" y="50%" fill="#eceeef" dy=".3em" style="font-size:30px;">!{team}</text>
-                </svg>
-                <div class="card-body">
-                  <p class="text-center">
-                    <span id="counter!{idx}" class="counter counter-analog2" data-direction="up" data-interval="1" data-format="999" data-stop="000">0</span>
-                  </p>
-                  <p class="card-text"></p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary" onclick="AddMark(!{idx})">+</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary" onclick="MinMark(!{idx})">-</button>
-                    </div>
-                    <small id="counter!{idx}_num" class="text-muted">0</small>
+          - idx++
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="60" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c"/>
+                <text id=team_title_!{idx} x="50%" y="50%" fill="#eceeef" dy=".3em" style="font-size:30px;">!{team}</text>
+              </svg>
+              <div class="card-body">
+                <p class="text-center">
+                  <span id="counter!{idx}" class="counter counter-analog2" data-direction="up" data-interval="1" data-format="999" data-stop="000">0</span>
+                </p>
+                <p class="card-text"></p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="AddMark(!{idx})">+</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="MinMark(!{idx})">-</button>
                   </div>
+                  <small id="counter!{idx}_num" class="text-muted">0</small>
                 </div>
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="60" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c"/>
-                  <text id=team_rank_!{idx} x="50%" y="50%" fill="#eceeef" dy=".3em" style="font-size:30px;">--</text>
-                </svg>
               </div>
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="60" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c"/>
+                <text id=team_rank_!{idx} x="50%" y="50%" fill="#eceeef" dy=".3em" style="font-size:30px;">--</text>
+              </svg>
             </div>
+          </div>
       </div>
     </div>
   </div>
-
 </main>
 
 <footer class="text-muted py-5">
@@ -126,7 +120,6 @@
     <span>標題名稱:</span>
     <input id=input_quiz_title value="22年度問答比賽" size="36">    
     <input id=button_quiz_title type="button" value="修改">
-
     <br>
     <span>分組名稱:</span>
     <input id=input_team_title_1 value="隊一" size="6">    
@@ -141,7 +134,6 @@
     <input id=input_start_mark_3 value="100" size="6">    
     <input id=input_start_mark_4 value="100" size="6">    
     <input id=botton_init_mark type="button" value="修改">
-
     <p class="float-end mb-1">
       <a href="#">Back to top</a>
     </p>
@@ -151,40 +143,41 @@
 </footer>
     script.
         function SetMark(i,num_){
-            let c_num =Number($(`#counter${i}_num`).text());
-            let start=c_num;
-            if(Math.abs(num_ - c_num)>30) start=num_;
-            let dir="up";
-            if(c_num>num_) dir="down"
-            $(`#counter${i}`).counter({
-            initial:start,
-            direction: dir,
-            interval: '1',
-            format: '999',
-            stop: num_
-            });
-            $(`#counter${i}_num`).text(num_);
+          if(num_<0 ) num_=0;
+          let c_num =Number($(`#counter${i}_num`).text());
+          let start=c_num;
+          if(Math.abs(num_ - c_num)>30) start=num_;
+          let dir="up";
+          if(c_num>num_) dir="down"
+          $(`#counter${i}`).counter({
+          initial:start,
+          direction: dir,
+          interval: '1',
+          format: '999',
+          stop: num_
+          });
+          $(`#counter${i}_num`).text(num_);
         }
         function AddMark(i){
-            let interv=1;
-            console.log($('#tx_check_a:checked'))
-            if($('#tx_check_a:checked').length>0 ) interv=Number($('#tx_a_mark').val());
-            if($('#tx_check_b:checked').length>0 ) interv=Number($('#tx_b_mark').val());
-            let c_num =Number($(`#counter${i}_num`).text());
-            SetMark(i,c_num + interv)
+          let interv=1;
+          console.log($('#tx_check_a:checked'))
+          if($('#tx_check_a:checked').length>0 ) interv=Number($('#tx_a_mark').val());
+          if($('#tx_check_b:checked').length>0 ) interv=Number($('#tx_b_mark').val());
+          let c_num =Number($(`#counter${i}_num`).text());
+          SetMark(i,c_num + interv)
         }
         function MinMark(i){
-            let interv=1;
-            if($('#tx_check_a:checked').length>0 ) interv=Number($('#tx_a_mark').val());
-            if($('#tx_check_b:checked').length>0 ) interv=Number($('#tx_b_mark').val());
-            let c_num =Number($(`#counter${i}_num`).text());
-            SetMark(i,c_num - interv)
+          let interv=1;
+          if($('#tx_check_a:checked').length>0 ) interv=Number($('#tx_a_mark').val());
+          if($('#tx_check_b:checked').length>0 ) interv=Number($('#tx_b_mark').val());
+          let c_num =Number($(`#counter${i}_num`).text());
+          SetMark(i,c_num - interv)
         }
         let teams_num=Number($('#teams_num').text());
         console.log(teams_num)
         $( "#button_quiz_title" ).click(function() {
-            let input_quiz_title=$('#input_quiz_title').val()
-            $('#quiz_title').text(input_quiz_title)
+          let input_quiz_title=$('#input_quiz_title').val()
+          $('#quiz_title').text(input_quiz_title)
         });    
         $( "#button_team_title" ).click(function() {
           for(let i=1;i<=teams_num;i++){
@@ -194,29 +187,29 @@
           }
         });    
         $( "#botton_init_mark" ).click(function() {
-            for(let i=1;i<=teams_num;i++){
-              let input_quiz_title=Number($(`#input_start_mark_${i}`).val())
-              SetMark(i,input_quiz_title)
-            }
+          for(let i=1;i<=teams_num;i++){
+            let input_quiz_title=Number($(`#input_start_mark_${i}`).val())
+            SetMark(i,input_quiz_title)
+          }
         });    
         $( "#botton_hiden_rank" ).click(function() {
-            for(let i=1;i<=teams_num;i++){
-               $(`#team_rank_${i}`).text("---")
-            }
+          for(let i=1;i<=teams_num;i++){
+            $(`#team_rank_${i}`).text("---")
+          }
         });    
         $( "#botton_show_rank" ).click(function() {
-            let marks=[]
-            for(let i=1;i<=teams_num;i++){
-              marks.push(Number($(`#counter${i}_num`).text()));
+          let marks=[]
+          for(let i=1;i<=teams_num;i++){
+            marks.push(Number($(`#counter${i}_num`).text()));
+          }
+          marks.sort(function(a, b){return b-a})
+          for(let i=1;i<=teams_num;i++){
+            let n_=Number($(`#counter${i}_num`).text());
+            if(n_==0) continue;
+            for(let j=0;j<marks.length;j++){
+              if(n_==marks[j]) {$(`#team_rank_${i}`).text(j+1);break;}
             }
-            marks.sort(function(a, b){return b-a})
-            for(let i=1;i<=teams_num;i++){
-              let n_=Number($(`#counter${i}_num`).text());
-              if(n_==0) continue;
-              for(let j=0;j<marks.length;j++){
-                if(n_==marks[j]) {$(`#team_rank_${i}`).text(j+1);break;}
-              }
-            }
+          }
         });    
         $('.counter').counter();
         //$('#custom').addClass('counter-analog').counter({
